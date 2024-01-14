@@ -8,6 +8,8 @@ var endScreen = document.querySelector("#end-screen");
 var playerScoreText = document.querySelector("#final-score");
 var scoreSubmitBtn = document.querySelector("#submit");
 var userInput = document.querySelector("#initials");
+var feedback = document.querySelector("#feedback-screen");
+var feedbackText = document.querySelector("#feedback-text");
 
 var correctAnswerSound = new Audio("../assets/sfx/correct.wav");
 var incorrectAnswerSound = new Audio("../assets/sfx/incorrect.wav");
@@ -104,8 +106,14 @@ function getQuestion() {
       if (userChoice === activeQuestionAnswer) {
         playerScore += activeQuestionPoints;
         correctAnswerSound.play();
+        feedback.classList.remove("feedback");
+        feedback.setAttribute("class", "hide");
         getQuestion();
       } else {
+        feedback.classList.remove("hide");
+        feedback.setAttribute("class", "feedback");
+        feedbackText.textContent = "WRONG!";
+
         incorrectAnswerSound.play();
         timeLeft -= penaltyTime;
       }
