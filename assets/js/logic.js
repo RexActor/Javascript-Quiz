@@ -9,8 +9,8 @@ var playerScoreText = document.querySelector("#final-score");
 var scoreSubmitBtn = document.querySelector("#submit");
 var userInput = document.querySelector("#initials");
 
-var correctAnswerSound = new Audio("assets/sfx/correct.wav");
-var incorrectAnswerSound = new Audio("assets/sfx/incorrect.wav");
+var correctAnswerSound = new Audio("../assets/sfx/correct.wav");
+var incorrectAnswerSound = new Audio("../assets/sfx/incorrect.wav");
 
 //add eventListener to submit score button
 scoreSubmitBtn.addEventListener("click", submitScore);
@@ -124,6 +124,7 @@ function startAgain() {
 
 //endGame function
 function gameEnd() {
+  timerText.textContent = 0;
   isPlaying = false;
   //resetting timer value
   timeLeft = 100;
@@ -154,7 +155,7 @@ function submitScore(event) {
   };
 
   allPlayers.push(player);
-  console.log(allPlayers);
+
   localStorage.setItem("userScore", JSON.stringify(allPlayers));
 
   //displaying start screen
