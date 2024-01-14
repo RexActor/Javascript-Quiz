@@ -18,7 +18,7 @@ Default timer is 100 seconds
 If during these 100 seconds you answer correctly all questions game will end.
 If you answer wrongly on question, your timer current time will be reduced by 20 seconds
 
-Specific sound will be played if you answer correctly or wrongly on question
+Feedback about question (if answered wrongly) will be displayed at bottom of answer choices
 
 ## Contents
 
