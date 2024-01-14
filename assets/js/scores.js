@@ -22,7 +22,6 @@ function getScores() {
   //if scoreList have items, then it's looping though each array element and creating
   //"li" element with username and scores and adding as child to "ol" element
   for (var i = 0; i < scoreList.length; i++) {
-    console.log(scoreList[i].userName);
     var li = document.createElement("li");
     li.textContent = `${scoreList[i].userName} - ${scoreList[i].userScore}`;
     highScores.appendChild(li);
