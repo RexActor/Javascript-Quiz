@@ -11,8 +11,8 @@ var userInput = document.querySelector("#initials");
 var feedback = document.querySelector("#feedback-screen");
 var feedbackText = document.querySelector("#feedback-text");
 
-var correctAnswerSound = new Audio("../assets/sfx/correct.wav");
-var incorrectAnswerSound = new Audio("../assets/sfx/incorrect.wav");
+var correctAnswerSound = new Audio("assets/sfx/correct.wav");
+var incorrectAnswerSound = new Audio("assets/sfx/incorrect.wav");
 
 //add eventListener to submit score button
 scoreSubmitBtn.addEventListener("click", submitScore);
