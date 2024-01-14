@@ -11,8 +11,8 @@ var userInput = document.querySelector("#initials");
 var feedback = document.querySelector("#feedback-screen");
 var feedbackText = document.querySelector("#feedback-text");
 
-var correctAnswerSound = new Audio("assets/sfx/correct.wav");
-var incorrectAnswerSound = new Audio("assets/sfx/incorrect.wav");
+// var correctAnswerSound = new Audio("assets/sfx/correct.wav");
+// var incorrectAnswerSound = new Audio("assets/sfx/incorrect.wav");
 
 //add eventListener to submit score button
 scoreSubmitBtn.addEventListener("click", submitScore);
@@ -105,7 +105,7 @@ function getQuestion() {
       //otherwise user receives time penalty for selecting wrong answer
       if (userChoice === activeQuestionAnswer) {
         playerScore += activeQuestionPoints;
-        correctAnswerSound.play();
+        // correctAnswerSound.play();
         feedback.classList.remove("feedback");
         feedback.setAttribute("class", "hide");
         getQuestion();
@@ -114,7 +114,7 @@ function getQuestion() {
         feedback.setAttribute("class", "feedback");
         feedbackText.textContent = "WRONG!";
 
-        incorrectAnswerSound.play();
+        // incorrectAnswerSound.play();
         timeLeft -= penaltyTime;
       }
     });
