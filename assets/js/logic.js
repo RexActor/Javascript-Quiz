@@ -6,6 +6,8 @@ var questionChoices = document.querySelector("#choices");
 var startScreen = document.querySelector(".start");
 var endScreen = document.querySelector("#end-screen");
 var playerScoreText = document.querySelector("#final-score");
+var scoreSubmitBtn = document.querySelector("#submit");
+var userInput = document.querySelector("#initials");
 
 var timer;
 var timeLeft = 100;
@@ -15,9 +17,11 @@ var activeQuestionAnswer = "";
 var activeQuestionChoices = [];
 var activeQuestionPoints = 0;
 var playerScore = 0;
+var allPlayers;
+var player;
+getUserScores();
 startButton.addEventListener("click", function () {
   //when start button is pressed, we are starting timer to countdown down
-
   startTimer();
   //we are taking question
   getQuestion();
@@ -31,16 +35,17 @@ function startTimer() {
     timerText.textContent = timeLeft;
     if (timeLeft <= 0) {
       clearInterval(timer);
+      gameEnd();
+      timeLeft = 100;
     }
   }, 1000);
 }
 
 function getQuestion() {
   if (activeQuestionIndex == questions.length) {
-    questionsBlock.setAttribute("class", "hide");
-    endScreen.classList.remove("hide");
-    playerScoreText.textContent = playerScore;
-    activeQuestionIndex = 0;
+    gameEnd();
+    clearInterval(timer);
+    timeLeft = 100;
   }
 
   questionChoices.textContent = "";
@@ -56,10 +61,10 @@ function getQuestion() {
     choiceButton.setAttribute("data-choice", activeQuestionChoices[i]);
     choiceButton.addEventListener("click", function (e) {
       var userChoice = e.target.getAttribute("data-choice");
-      console.log(userChoice);
+
       if (userChoice === activeQuestionAnswer) {
-        getQuestion();
         playerScore += activeQuestionPoints;
+        getQuestion();
       } else {
         timeLeft -= 20;
       }
@@ -68,4 +73,36 @@ function getQuestion() {
   }
 
   activeQuestionIndex++;
+}
+
+function startAgain() {
+  endScreen.setAttribute("class", "hide");
+  startScreen.classList.remove("hide");
+  timerText.textContent = "0";
+}
+
+function gameEnd() {
+  questionsBlock.setAttribute("class", "hide");
+  endScreen.classList.remove("hide");
+  playerScoreText.textContent = playerScore;
+  activeQuestionIndex = 0;
+  console.log(allPlayers);
+  scoreSubmitBtn.addEventListener("click", function () {
+    player = {
+      userName: userInput.value,
+      userScore: playerScore,
+    };
+
+    allPlayers.push(player);
+    localStorage.setItem("userScore", JSON.stringify(allPlayers));
+    console.log(allPlayers);
+    startAgain();
+  });
+}
+
+function getUserScores() {
+  allPlayers = JSON.parse(localStorage.getItem("userScore"));
+  if (!allPlayers) {
+    allPlayers = [];
+  }
 }
